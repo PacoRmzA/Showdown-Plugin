@@ -1,0 +1,16 @@
+main: dev.TheCubicJedi.showdownPlugin.App
+name: Showdown
+version: 1.0-SNAPSHOT
+api: 1.16.4
+description: A plugin based on the Manhunt Plugin by Eugene Chau and the Speedrun Showdown tournament by Nerdi
+author: TheCubicJedi
+commands:
+  addplayer:
+    description: Add a player to a team.
+    usage: /addhunter <username> <team>
+  getplayers:
+    description: Get the usernames of all players within a team.
+    usage: /getplayers <team>
+  removeplayer:
+    description: Remove a player from the team they are in.
+    usage: /removehunter <username>
