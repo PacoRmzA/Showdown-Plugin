@@ -34,22 +34,25 @@ public class MovementListener implements Listener {
         for (Player p : e.getPlayer().getWorld().getPlayers()) {
             if ((p.getInventory().getItemInMainHand().getType() == Material.COMPASS || p.getInventory().getItemInOffHand().getType() == Material.COMPASS) && p != null && plugin.getPlayerIds().contains(p.getUniqueId())) {
                 int mode = modes.get(p.getUniqueId());
-                int teamTracking = teams.get(p.getUniqueId());;
+                int teamTracking = teams.get(p.getUniqueId());
                 ItemStack item;
-                ChatColor color = ChatColor.GREEN;
+                //ChatColor color = ChatColor.GREEN;
                 if (p.getInventory().getItemInMainHand().getType() == Material.COMPASS) item = p.getInventory().getItemInMainHand();
                 else item = p.getInventory().getItemInOffHand();
                 if (mode == 1 && getClosestTeammate(p, (teamTracking + 1) % 2) != null) {
                     teamTracking = (teams.get(p.getUniqueId()) + 1) % 2;
-                    color = ChatColor.RED;
+                    //color = ChatColor.RED;
                 }
-                Player closest = getClosestTeammate(p, teamTracking);
-                p.sendMessage(color + closest.getName());
-                //p.setCompassTarget(closest.getLocation());
-                CompassMeta meta = (CompassMeta) item.getItemMeta();
-                meta.setLodestoneTracked(false);
-                meta.setLodestone(closest.getLocation());
-                item.setItemMeta(meta);
+                if (getClosestTeammate(p, teamTracking) != null) {
+                    Player closest = getClosestTeammate(p, teamTracking);
+                    //p.sendMessage(color + closest.getName());
+                    //p.setCompassTarget(closest.getLocation());
+                    CompassMeta meta = (CompassMeta) item.getItemMeta();
+                    meta.setLodestoneTracked(false);
+                    meta.setLodestone(closest.getLocation());
+                    item.setItemMeta(meta);
+                }
+                
             }  
         }
     }
@@ -68,7 +71,6 @@ public class MovementListener implements Listener {
                 }
             }
         }
-        if (closestTeammate != null) return closestTeammate;
-        else return p;
+        return closestTeammate;
     }
 }
