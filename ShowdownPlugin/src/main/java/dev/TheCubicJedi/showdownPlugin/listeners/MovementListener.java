@@ -40,7 +40,7 @@ public class MovementListener implements Listener {
                 if (p.getInventory().getItemInMainHand().getType() == Material.COMPASS) item = p.getInventory().getItemInMainHand();
                 else item = p.getInventory().getItemInOffHand();
                 if (mode == 1) {
-                    teamTracking = (teams.get(p.getUniqueId()) + 1) % 2;
+                    teamTracking = (teams.get(p.getUniqueId())) % 2 + 1;
                     //color = ChatColor.RED;
                 }
                 if (getClosestTeammate(p, teamTracking) != null) {
